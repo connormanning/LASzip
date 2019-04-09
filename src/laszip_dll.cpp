@@ -28,7 +28,7 @@
      7 November 2018 -- assure identical legacy and extended flags in laszip_write_point()
     20 October 2018 -- changed (U8*) to (const U8*) for all out->put___() calls
      5 October 2018 -- corrected 'is_empty' return value in laszip_inside_rectangle()
-    29 September 2018 -- laszip_prepare_point_for_write() sets extended_point_type 
+    29 September 2018 -- laszip_prepare_point_for_write() sets extended_point_type
     19 September 2018 -- removed tuples and triple support from attributes
      7 September 2018 -- replaced calls to _strdup with calls to the LASCopyString macro
      6 April 2018 -- added zero() function to laszip_dll struct to fix memory leak
@@ -2174,7 +2174,7 @@ laszip_prepare_point_for_write(
     // must *not* be set for the old point type 5 or lower
 
     laszip_dll->point.extended_point_type = 0;
-    
+
     // we are *not* operating in compatibility mode
 
     laszip_dll->compatibility_mode = FALSE;
@@ -2794,6 +2794,11 @@ setup_laszip_items(
 
   // compute offsets (or points item pointers) for data transfer from the point items
 
+  if (laszip_dll->point_items)
+  {
+    delete [] laszip_dll->point_items;
+    laszip_dll->point_items = 0;
+  }
   laszip_dll->point_items = new U8*[laszip->num_items];
   if (laszip_dll->point_items == 0)
   {
