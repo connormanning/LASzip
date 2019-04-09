@@ -2,15 +2,15 @@
 ===============================================================================
 
   FILE:  bytestreamout_array.hpp
-  
+
   CONTENTS:
-      
+
   PROGRAMMERS:
-  
+
     martin.isenburg@rapidlasso.com  -  http://rapidlasso.com
-  
+
   COPYRIGHT:
-  
+
     (c) 2007-2016, martin isenburg, rapidlasso - fast tools to catch reality
 
     This is free software; you can redistribute and/or modify it under the
@@ -19,13 +19,13 @@
 
     This software is distributed WITHOUT ANY WARRANTY and without even the
     implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  
+
   CHANGE HISTORY:
-  
+
     22 June 2016 -- access to current size for "native LAS 1.4 compressor"
     19 July 2015 -- moved from LASlib to LASzip for "compatibility mode" in DLL
      9 April 2012 -- created after cooking Zuccini/Onion/Potatoe dinner for Mara
-  
+
 ===============================================================================
 */
 #ifndef BYTE_STREAM_OUT_ARRAY_HPP
@@ -53,7 +53,7 @@ public:
 /* seek to the end of the file                               */
   BOOL seekEnd();
 /* destructor                                                */
-  ~ByteStreamOutArray(){};
+  ~ByteStreamOutArray(){ free(data); };
 /* get access to data                                        */
   inline I64 getSize() const { return size; };
   inline I64 getCurr() const { return curr; };
